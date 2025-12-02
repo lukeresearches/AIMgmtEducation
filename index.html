@@ -10,10 +10,11 @@
         :root {
             --dal-gold: #FDB913;
             --dal-black: #000000;
-            --accent-blue: #0066CC;
-            --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --dal-grey: #5C5C5C;
+            --accent-gold: #FDB913;
+            --gradient-1: linear-gradient(135deg, #000000 0%, #333333 100%);
+            --gradient-2: linear-gradient(135deg, #FDB913 0%, #FFC933 100%);
+            --gradient-3: linear-gradient(135deg, #333333 0%, #5C5C5C 100%);
             --text-dark: #1a1a1a;
             --text-light: #666;
             --bg-light: #f8f9fa;
@@ -36,7 +37,7 @@
         /* Hero Section */
         .hero {
             min-height: 100vh;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #000000 0%, #333333 100%);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -91,6 +92,7 @@
             text-transform: uppercase;
             letter-spacing: -2px;
             line-height: 1.1;
+            color: var(--dal-gold);
         }
         
         .hero .subtitle {
@@ -109,15 +111,16 @@
         }
         
         .meta-item {
-            background: rgba(255,255,255,0.1);
+            background: rgba(253, 185, 19, 0.1);
             backdrop-filter: blur(10px);
             padding: 1rem 2rem;
             border-radius: 50px;
-            border: 1px solid rgba(255,255,255,0.2);
+            border: 1px solid rgba(253, 185, 19, 0.3);
             font-size: 0.9rem;
             text-transform: uppercase;
             letter-spacing: 1px;
             font-weight: 600;
+            color: var(--dal-gold);
         }
         
         /* Navigation */
@@ -155,7 +158,7 @@
         }
         
         .nav-links a:hover {
-            color: var(--accent-blue);
+            color: var(--dal-gold);
         }
         
         /* Section Styles */
@@ -180,7 +183,7 @@
             font-size: 2.5rem;
             font-weight: 800;
             margin-bottom: 1rem;
-            background: var(--gradient-1);
+            background: linear-gradient(135deg, #000000 0%, #333333 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -195,13 +198,13 @@
         
         /* Theory of Value */
         .value-statement {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            color: white;
+            background: linear-gradient(135deg, #FDB913 0%, #FFC933 100%);
+            color: #000000;
             padding: 3rem;
             border-radius: 20px;
             font-size: 1.3rem;
             text-align: center;
-            font-weight: 300;
+            font-weight: 500;
             line-height: 1.8;
             box-shadow: 0 20px 40px rgba(0,0,0,0.1);
             transform: perspective(1000px) rotateX(2deg);
@@ -227,7 +230,7 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.08);
             transition: transform 0.3s, box-shadow 0.3s;
             border-top: 4px solid transparent;
-            background-image: linear-gradient(white, white), var(--gradient-1);
+            background-image: linear-gradient(white, white), linear-gradient(135deg, #FDB913 0%, #FFC933 100%);
             background-clip: padding-box, border-box;
             background-origin: padding-box, border-box;
             border-top: 4px solid transparent;
@@ -252,7 +255,7 @@
         .requirement-icon {
             width: 50px;
             height: 50px;
-            background: var(--gradient-1);
+            background: linear-gradient(135deg, #FDB913 0%, #FFC933 100%);
             border-radius: 10px;
             margin-bottom: 1rem;
             display: flex;
@@ -274,7 +277,7 @@
             top: 0;
             bottom: 0;
             width: 2px;
-            background: linear-gradient(180deg, var(--gradient-1), var(--gradient-2));
+            background: linear-gradient(180deg, #000000, #FDB913);
             transform: translateX(-50%);
         }
         
@@ -305,7 +308,7 @@
             width: 20px;
             height: 20px;
             background: white;
-            border: 4px solid #667eea;
+            border: 4px solid #FDB913;
             border-radius: 50%;
             z-index: 1;
         }
@@ -337,12 +340,12 @@
             font-size: 1.1rem;
         }
         
-        .week-1 { background: linear-gradient(135deg, #667eea, #764ba2); }
-        .week-2 { background: linear-gradient(135deg, #f093fb, #f5576c); }
-        .week-3 { background: linear-gradient(135deg, #4facfe, #00f2fe); }
-        .week-4 { background: linear-gradient(135deg, #43e97b, #38f9d7); }
-        .week-5 { background: linear-gradient(135deg, #fa709a, #fee140); }
-        .week-6 { background: linear-gradient(135deg, #30cfd0, #330867); }
+        .week-1 { background: linear-gradient(135deg, #000000, #333333); }
+        .week-2 { background: linear-gradient(135deg, #FDB913, #FFC933); }
+        .week-3 { background: linear-gradient(135deg, #333333, #5C5C5C); }
+        .week-4 { background: linear-gradient(135deg, #000000, #1A1A1A); }
+        .week-5 { background: linear-gradient(135deg, #FDB913, #FFDD55); }
+        .week-6 { background: linear-gradient(135deg, #1A1A1A, #333333); }
         
         .week-content {
             padding: 1.5rem;
@@ -407,7 +410,7 @@
             background: white;
             padding: 1.5rem;
             border-radius: 10px;
-            border-left: 4px solid var(--gradient-1);
+            border-left: 4px solid var(--dal-gold);
         }
         
         /* Footer */
@@ -482,7 +485,7 @@
     <div class="hero">
         <div class="hero-content">
             <h1>AI Foundations for Management Education</h1>
-            <p class="subtitle">Building practical AI literacy for BComm, BMgmt, and MBA students at Dalhousie University</p>
+            <p class="subtitle">Building practical AI literacy for your BComm, BMgmt, and MBA students</p>
             <div class="hero-meta">
                 <div class="meta-item">📚 6-Week Program</div>
                 <div class="meta-item">🎯 Experiential Learning</div>
@@ -494,7 +497,7 @@
     <!-- Navigation -->
     <nav class="nav">
         <div class="nav-container">
-            <div style="font-weight: 800; font-size: 1.2rem;">Dal FoM | AI Initiative</div>
+            <div style="font-weight: 800; font-size: 1.2rem; color: var(--dal-gold);">DALHOUSIE | Faculty of Management</div>
             <ul class="nav-links">
                 <li><a href="#value">Value</a></li>
                 <li><a href="#requirements">Requirements</a></li>
