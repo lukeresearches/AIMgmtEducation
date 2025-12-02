@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Foundations for Management Education | Dalhousie</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Space+Mono:wght@400;700&display=swap');
+        
+        :root {
+            --dal-gold: #FDB913;
+            --dal-black: #000000;
+            --accent-blue: #0066CC;
+            --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --text-dark: #1a1a1a;
+            --text-light: #666;
+            --bg-light: #f8f9fa;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Outfit', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            overflow-x: hidden;
+            background: #fff;
+        }
+        
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 10px,
+                rgba(255,255,255,0.03) 10px,
+                rgba(255,255,255,0.03) 20px
+            );
+            animation: slide 20s linear infinite;
+        }
+        
+        @keyframes slide {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+        
+        .hero-content {
+            text-align: center;
+            color: white;
+            z-index: 1;
+            padding: 2rem;
+            max-width: 900px;
+            animation: fadeInUp 1s ease;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: -2px;
+            line-height: 1.1;
+        }
+        
+        .hero .subtitle {
+            font-size: 1.3rem;
+            font-weight: 300;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+        
+        .hero-meta {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 3rem;
+        }
+        
+        .meta-item {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            border: 1px solid rgba(255,255,255,0.2);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+        
+        /* Navigation */
+        .nav {
+            position: sticky;
+            top: 0;
+            background: white;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: var(--text-dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            font-size: 0.95rem;
+        }
+        
+        .nav-links a:hover {
+            color: var(--accent-blue);
+        }
+        
+        /* Section Styles */
+        section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+            animation: fadeIn 0.8s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .section-header h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .section-header p {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* Theory of Value */
+        .value-statement {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 3rem;
+            border-radius: 20px;
+            font-size: 1.3rem;
+            text-align: center;
+            font-weight: 300;
+            line-height: 1.8;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            transform: perspective(1000px) rotateX(2deg);
+            transition: transform 0.3s;
+        }
+        
+        .value-statement:hover {
+            transform: perspective(1000px) rotateX(0deg);
+        }
+        
+        /* Requirements Grid */
+        .requirements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .requirement-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-top: 4px solid transparent;
+            background-image: linear-gradient(white, white), var(--gradient-1);
+            background-clip: padding-box, border-box;
+            background-origin: padding-box, border-box;
+            border-top: 4px solid transparent;
+        }
+        
+        .requirement-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+        }
+        
+        .requirement-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.8rem;
+            color: var(--text-dark);
+        }
+        
+        .requirement-card p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+        
+        .requirement-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--gradient-1);
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+        
+        /* Process Timeline */
+        .timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, var(--gradient-1), var(--gradient-2));
+            transform: translateX(-50%);
+        }
+        
+        .timeline-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 4rem;
+            position: relative;
+        }
+        
+        .timeline-content {
+            width: 45%;
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+        
+        .timeline-item:nth-child(even) .timeline-content {
+            margin-left: auto;
+        }
+        
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 20px;
+            background: white;
+            border: 4px solid #667eea;
+            border-radius: 50%;
+            z-index: 1;
+        }
+        
+        /* Curriculum Week Cards */
+        .week-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .week-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            transition: transform 0.3s;
+        }
+        
+        .week-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .week-header {
+            padding: 1.5rem;
+            color: white;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        
+        .week-1 { background: linear-gradient(135deg, #667eea, #764ba2); }
+        .week-2 { background: linear-gradient(135deg, #f093fb, #f5576c); }
+        .week-3 { background: linear-gradient(135deg, #4facfe, #00f2fe); }
+        .week-4 { background: linear-gradient(135deg, #43e97b, #38f9d7); }
+        .week-5 { background: linear-gradient(135deg, #fa709a, #fee140); }
+        .week-6 { background: linear-gradient(135deg, #30cfd0, #330867); }
+        
+        .week-content {
+            padding: 1.5rem;
+        }
+        
+        .week-content h4 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+        
+        .week-content p {
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+        
+        .application-box {
+            background: var(--bg-light);
+            padding: 1rem;
+            border-radius: 10px;
+            margin-top: 1rem;
+            border-left: 4px solid var(--dal-gold);
+        }
+        
+        .application-box strong {
+            color: var(--text-dark);
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Profile Section */
+        .profile-section {
+            background: var(--bg-light);
+            border-radius: 20px;
+            padding: 3rem;
+            margin-top: 3rem;
+        }
+        
+        .profile-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .profile-header h3 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .profile-header .title {
+            color: var(--text-light);
+            font-size: 1.1rem;
+        }
+        
+        .credentials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .credential {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-left: 4px solid var(--gradient-1);
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--text-dark);
+            color: white;
+            text-align: center;
+            padding: 3rem 2rem;
+            margin-top: 5rem;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: var(--dal-gold);
+            color: var(--text-dark);
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s, box-shadow 0.3s;
+            margin-top: 2rem;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(253, 185, 19, 0.4);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .timeline::before {
+                left: 20px;
+            }
+            
+            .timeline-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .timeline-content {
+                width: calc(100% - 50px);
+                margin-left: 50px;
+            }
+            
+            .timeline-dot {
+                left: 20px;
+            }
+            
+            .nav-links {
+                flex-direction: column;
+                gap: 1rem;
+                width: 100%;
+                margin-top: 1rem;
+            }
+        }
+        
+        /* Scroll animations */
+        .scroll-fade {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s, transform 0.8s;
+        }
+        
+        .scroll-fade.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <div class="hero">
+        <div class="hero-content">
+            <h1>AI Foundations for Management Education</h1>
+            <p class="subtitle">Building practical AI literacy for BComm, BMgmt, and MBA students at Dalhousie University</p>
+            <div class="hero-meta">
+                <div class="meta-item">📚 6-Week Program</div>
+                <div class="meta-item">🎯 Experiential Learning</div>
+                <div class="meta-item">🚀 Fall 2025 Launch</div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-container">
+            <div style="font-weight: 800; font-size: 1.2rem;">Dal FoM | AI Initiative</div>
+            <ul class="nav-links">
+                <li><a href="#value">Value</a></li>
+                <li><a href="#requirements">Requirements</a></li>
+                <li><a href="#process">Process</a></li>
+                <li><a href="#curriculum">Curriculum</a></li>
+                <li><a href="#instructor">Instructor</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <!-- Theory of Value -->
+    <section id="value">
+        <div class="section-header">
+            <h2>Theory of Value</h2>
+            <p>Our vision for AI-enabled management education</p>
+        </div>
+        <div class="value-statement scroll-fade">
+            Integrating AI foundations courses with Dalhousie's world-class management education will provide undergrad and MBA students practical AI literacy that amplifies how they learn, work, and lead in AI-enabled organizations.
+        </div>
+    </section>
+    
+    <!-- Program Requirements -->
+    <section id="requirements">
+        <div class="section-header">
+            <h2>Program Requirements</h2>
+            <p>Key criteria for successful implementation</p>
+        </div>
+        <div class="requirements-grid">
+            <div class="requirement-card scroll-fade">
+                <div class="requirement-icon">🎯</div>
+                <h3>Faculty Vision Alignment</h3>
+                <p>Serves as the AI readiness foundation for future AI offerings and an MBA AI certificate</p>
+            </div>
+            <div class="requirement-card scroll-fade">
+                <div class="requirement-icon">🔗</div>
+                <h3>Curriculum Integration</h3>
+                <p>BComm/BMgmt/MBA instructors can map course modules to current objectives and assignments</p>
+            </div>
+            <div class="requirement-card scroll-fade">
+                <div class="requirement-icon">🛠️</div>
+                <h3>Experiential Learning</h3>
+                <p>Students use AI tools to build course artifacts in most class sessions</p>
+            </div>
+            <div class="requirement-card scroll-fade">
+                <div class="requirement-icon">📊</div>
+                <h3>Evidence-Based</h3>
+                <p>Course draws on rapid literature reviews of AI in management education</p>
+            </div>
+            <div class="requirement-card scroll-fade">
+                <div class="requirement-icon">💼</div>
+                <h3>Market Value</h3>
+                <p>Co-op employers and industry partners endorse course outcomes</p>
+            </div>
+            <div class="requirement-card scroll-fade">
+                <div class="requirement-icon">👥</div>
+                <h3>Student Endorsement</h3>
+                <p>The course improves how students use AI for learning and work</p>
+            </div>
+            <div class="requirement-card scroll-fade">
+                <div class="requirement-icon">📈</div>
+                <h3>Scalable Delivery</h3>
+                <p>Project outputs support large undergrad cohorts and new instructors</p>
+            </div>
+            <div class="requirement-card scroll-fade">
+                <div class="requirement-icon">🔄</div>
+                <h3>Shared Infrastructure</h3>
+                <p>Undergrad/MBA courses reuse AI modules with adaptations</p>
+            </div>
+            <div class="requirement-card scroll-fade">
+                <div class="requirement-icon">⚡</div>
+                <h3>Rapid Piloting</h3>
+                <p>Minimal version runs by fall/summer with 2-3 pilots producing refinement data</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Course Design Process -->
+    <section id="process">
+        <div class="section-header">
+            <h2>Course Design Process</h2>
+            <p>Strategic approach to curriculum development</p>
+        </div>
+        <div class="timeline">
+            <div class="timeline-item scroll-fade">
+                <div class="timeline-content">
+                    <h3>1. Clarify Vision & Constraints</h3>
+                    <p>Meet with FoM leadership to define goals, timelines, and how courses anchor future AI offerings</p>
+                </div>
+                <div class="timeline-dot"></div>
+            </div>
+            <div class="timeline-item scroll-fade">
+                <div class="timeline-content">
+                    <h3>2. Draft High-Level Outline</h3>
+                    <p>Sketch shared outline with modules, core concepts, and assessment approach</p>
+                </div>
+                <div class="timeline-dot"></div>
+            </div>
+            <div class="timeline-item scroll-fade">
+                <div class="timeline-content">
+                    <h3>3. Map to Existing Curriculum</h3>
+                    <p>Align draft outline with current objectives, assignments, and pathways</p>
+                </div>
+                <div class="timeline-dot"></div>
+            </div>
+            <div class="timeline-item scroll-fade">
+                <div class="timeline-content">
+                    <h3>4. Ground in Evidence</h3>
+                    <p>Refresh literature reviews and consult employers to refine outcomes</p>
+                </div>
+                <div class="timeline-dot"></div>
+            </div>
+            <div class="timeline-item scroll-fade">
+                <div class="timeline-content">
+                    <h3>5. Design Modular Blocks</h3>
+                    <p>Create reusable modules that support both undergrad and MBA levels</p>
+                </div>
+                <div class="timeline-dot"></div>
+            </div>
+            <div class="timeline-item scroll-fade">
+                <div class="timeline-content">
+                    <h3>6. Pilot & Refine</h3>
+                    <p>Test selected modules, collect AI-readiness data and faculty feedback</p>
+                </div>
+                <div class="timeline-dot"></div>
+            </div>
+            <div class="timeline-item scroll-fade">
+                <div class="timeline-content">
+                    <h3>7. Complete Detailed Syllabus</h3>
+                    <p>Translate framework into week-by-week syllabus with topics, readings, and labs</p>
+                </div>
+                <div class="timeline-dot"></div>
+            </div>
+            <div class="timeline-item scroll-fade">
+                <div class="timeline-content">
+                    <h3>8. Prepare for Scale</h3>
+                    <p>Package teaching guides, rubrics, and tech setup for other instructors</p>
+                </div>
+                <div class="timeline-dot"></div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Curriculum Overview -->
+    <section id="curriculum">
+        <div class="section-header">
+            <h2>Six-Week Curriculum</h2>
+            <p>Progressive journey from foundations to application</p>
+        </div>
+        <div class="week-grid">
+            <div class="week-card scroll-fade">
+                <div class="week-header week-1">Week 1</div>
+                <div class="week-content">
+                    <h4>AI Disruption & Literacy Foundations</h4>
+                    <p>AI overview, generative vs. predictive AI, basic model logic, prompting and context, AI innovation, ethics (bias, privacy, climate impacts).</p>
+                    <div class="application-box">
+                        <strong>Application:</strong>
+                        Students complete an "AI impact scan" on an industry/function they care about and write a brief on risks, opportunities, and open questions.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="week-card scroll-fade">
+                <div class="week-header week-2">Week 2</div>
+                <div class="week-content">
+                    <h4>AI as a Learning Partner & Mindset</h4>
+                    <p>AI tools for learning (NotebookLM, ChatGPT), prompting for learning, human in the loop, academic integrity, critical reflection on outputs.</p>
+                    <div class="application-box">
+                        <strong>Application:</strong>
+                        Test an AI-enhanced study workflow, interview a peer about AI use, and revise personal "AI use guidelines."
+                    </div>
+                </div>
+            </div>
+            
+            <div class="week-card scroll-fade">
+                <div class="week-header week-3">Week 3</div>
+                <div class="week-content">
+                    <h4>AI Value Propositions</h4>
+                    <p>How AI creates value in organizations, automating decisions and workflows, AI-native and AI-disrupted firms, linking capabilities to business models.</p>
+                    <div class="application-box">
+                        <strong>Application:</strong>
+                        Teams draft and critique an AI-enabled value proposition for a real management problem.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="week-card scroll-fade">
+                <div class="week-header week-4">Week 4</div>
+                <div class="week-content">
+                    <h4>AI Skills: Research & Data Analysis</h4>
+                    <p>AI-assisted secondary research, summarizing reports, qualitative data analysis, basics of AI-assisted coding or no-code tools.</p>
+                    <div class="application-box">
+                        <strong>Application:</strong>
+                        Use AI to synthesize research and code qualitative data into themes, producing a management memo.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="week-card scroll-fade">
+                <div class="week-header week-5">Week 5</div>
+                <div class="week-content">
+                    <h4>AI in Business, Finance & Entrepreneurship</h4>
+                    <p>Cross-functional use cases in marketing, operations, HR, and finance. AI in forecasting and decision support, AI-enabled startups.</p>
+                    <div class="application-box">
+                        <strong>Application:</strong>
+                        Case-based lab analyzing how AI reshapes business models and proposing improvements.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="week-card scroll-fade">
+                <div class="week-header week-6">Week 6</div>
+                <div class="week-content">
+                    <h4>AI in Organizations: Leadership & Collaboration</h4>
+                    <p>AI-enabled workflows and roles, collaborating with AI, change management, equity and inclusion in AI adoption.</p>
+                    <div class="application-box">
+                        <strong>Application:</strong>
+                        Teams redesign a workflow to integrate AI responsibly and present a plan highlighting benefits, risks, and leadership actions.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Instructor Profile -->
+    <section id="instructor">
+        <div class="section-header">
+            <h2>Lead Instructor</h2>
+            <p>Bringing research and practice together</p>
+        </div>
+        <div class="profile-section scroll-fade">
+            <div class="profile-header">
+                <h3>Luke DeCoste</h3>
+                <p class="title">PhD Candidate & Serial Entrepreneur</p>
+            </div>
+            <p style="text-align: center; max-width: 800px; margin: 0 auto; line-height: 1.8;">
+                Luke DeCoste brings a unique blend of academic rigor and entrepreneurial experience. He has taught Dalhousie's MGMT 4901 five times, redesigning it for AI integration, and recently helped launch AI2Market through Dal Innovates. His research includes systematic literature reviews on AI in management education and randomized controlled trials on AI-enhanced learning.
+            </p>
+            <div class="credentials-grid">
+                <div class="credential">
+                    <strong>🎓 Education</strong>
+                    <p>B.Eng, Master of Public & International Affairs, PhD Candidate (Organizational Psychology)</p>
+                </div>
+                <div class="credential">
+                    <strong>🏆 Experience</strong>
+                    <p>Techstars, Creative Destruction Lab, Governor General's Leadership Conference</p>
+                </div>
+                <div class="credential">
+                    <strong>📚 Research</strong>
+                    <p>Academy of Management, Conference on Field Experiments in Strategy presenter</p>
+                </div>
+                <div class="credential">
+                    <strong>🚀 Training Delivered</strong>
+                    <p>Dal Innovates, NSCC, Labs4, Lab2Market, Ignite, Volta, Emera ideaHUB</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer CTA -->
+    <footer>
+        <h2 style="margin-bottom: 1rem;">Ready to Lead in AI Education?</h2>
+        <p style="font-size: 1.1rem; opacity: 0.9;">Let's build the future of management education together</p>
+        <a href="#" class="cta-button">Schedule a Discussion</a>
+    </footer>
+    
+    <script>
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('.scroll-fade').forEach(el => {
+            observer.observe(el);
+        });
+        
+        // Smooth scrolling for navigation
+        document.querySelectorAll('.nav-links a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
