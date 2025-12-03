@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smarter, Faster: Building an AI-Driven Enterprise</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            overflow: hidden;
+            background: #000;
+        }
+
+        .presentation-container {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .slide {
+            width: 90vw;
+            max-width: 1200px;
+            height: 90vh;
+            max-height: 675px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 10px 50px rgba(0, 0, 0, 0.3);
+            padding: 60px;
+            display: none;
+            flex-direction: column;
+            position: relative;
+            overflow: auto;
+        }
+
+        .slide.active {
+            display: flex;
+        }
+
+        /* Hero/Dark slides */
+        .slide.dark {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            color: white;
+        }
+
+        .slide.gradient {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        /* Hero slide with image */
+        .hero-slide {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .hero-content h1 {
+            font-size: 3em;
+            font-weight: 800;
+            margin-bottom: 30px;
+            line-height: 1.2;
+        }
+
+        .hero-meta {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .hero-image {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Section headers */
+        .slide.section h1 {
+            font-size: 4em;
+            font-weight: 900;
+            text-align: center;
+            margin: auto;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* Center layout */
+        .slide.center {
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .slide.center h1 {
+            font-size: 5em;
+            font-weight: 900;
+        }
+
+        /* Regular slide headers */
+        h1 {
+            font-size: 2.5em;
+            font-weight: 700;
+            margin-bottom: 30px;
+            color: inherit;
+        }
+
+        h2 {
+            font-size: 1.8em;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #667eea;
+        }
+
+        .slide.dark h2, .slide.gradient h2 {
+            color: #a0d8ff;
+        }
+
+        /* Content styling */
+        .content {
+            flex: 1;
+            font-size: 1.1em;
+            line-height: 1.8;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 20px;
+            padding-left: 30px;
+            position: relative;
+        }
+
+        li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .slide.dark li:before, .slide.gradient li:before {
+            color: #a0d8ff;
+        }
+
+        /* Activity slides */
+        .activity-box {
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            padding: 25px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .slide.dark .activity-box, .slide.gradient .activity-box {
+            background: rgba(255, 255, 255, 0.1);
+            border-left-color: #a0d8ff;
+        }
+
+        /* Stats highlight */
+        .stat-highlight {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .stat-number {
+            font-size: 8em;
+            font-weight: 900;
+            line-height: 1;
+            margin: 20px 0;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .slide.gradient .stat-number {
+            color: white;
+            background: none;
+            -webkit-text-fill-color: white;
+        }
+
+        .stat-description {
+            font-size: 1.5em;
+            text-align: center;
+            max-width: 600px;
+        }
+
+        /* Chart placeholder */
+        .chart-container {
+            width: 100%;
+            height: 400px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 20px 0;
+            position: relative;
+        }
+
+        .chart-image {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        /* Grid layout for hypothesis testing */
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+            margin: 20px 0;
+        }
+
+        .grid-item {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            border-top: 3px solid #667eea;
+        }
+
+        .slide.dark .grid-item, .slide.gradient .grid-item {
+            background: rgba(255, 255, 255, 0.1);
+            border-top-color: #a0d8ff;
+        }
+
+        .grid-item h3 {
+            font-size: 1.3em;
+            margin-bottom: 15px;
+        }
+
+        .grid-item p {
+            font-size: 0.95em;
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        .navigation {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+            z-index: 1000;
+        }
+
+        .nav-button {
+            background: rgba(102, 126, 234, 0.9);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-button:hover {
+            background: rgba(102, 126, 234, 1);
+            transform: scale(1.05);
+        }
+
+        .nav-button:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        /* Slide counter */
+        .slide-counter {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-size: 0.9em;
+            font-weight: 600;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        /* Progress bar */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            transition: width 0.3s ease;
+            z-index: 1001;
+        }
+
+        /* QR Code */
+        .qr-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        .qr-box {
+            width: 300px;
+            height: 300px;
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            border: 3px solid #667eea;
+        }
+
+        /* Outline styling */
+        .outline-content {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .outline-section {
+            background: #f8f9fa;
+            padding: 15px 20px;
+            border-radius: 6px;
+            border-left: 4px solid #667eea;
+        }
+
+        /* Bio section */
+        .bio-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 40px;
+            align-items: start;
+        }
+
+        .bio-image-placeholder {
+            width: 100%;
+            aspect-ratio: 3/4;
+            background: #f0f0f0;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3em;
+            color: #ccc;
+        }
+
+        .organizations {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .org-badge {
+            background: #667eea;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: 600;
+        }
+
+        /* Keyboard hint */
+        .keyboard-hint {
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-size: 0.85em;
+            z-index: 1000;
+            opacity: 0.7;
+            backdrop-filter: blur(10px);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .slide {
+                padding: 30px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            .hero-slide {
+                grid-template-columns: 1fr;
+            }
+
+            .grid-4 {
+                grid-template-columns: 1fr;
+            }
+
+            .bio-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Animation */
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .slide.active {
+            animation: slideIn 0.5s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-bar" id="progressBar"></div>
+    <div class="slide-counter" id="slideCounter">1 / 21</div>
+    <div class="keyboard-hint">Use ← → arrow keys or buttons to navigate</div>
+
+    <div class="presentation-container">
+        <!-- Slide 1: Title -->
+        <div class="slide active dark hero-slide" data-slide="1">
+            <div class="hero-content">
+                <h1>Smarter, Faster<br>Strategies for<br>Building an AI-Driven<br>Enterprise</h1>
+                <div class="hero-meta">
+                    <p>Luke DeCoste</p>
+                    <p>CAFE 430</p>
+                    <p>Dec 2, 2025</p>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div style="width: 300px; height: 300px; background: linear-gradient(135deg, #10b981 0%, #3b82f6 100%); border-radius: 50%; opacity: 0.3;"></div>
+            </div>
+        </div>
+
+        <!-- Slide 2: Welcome -->
+        <div class="slide center" data-slide="2">
+            <h1>WELCOME</h1>
+        </div>
+
+        <!-- Slide 3: Activity -->
+        <div class="slide" data-slide="3">
+            <h1>Activity - Think, Pair, Share</h1>
+            <h2>You, AI, and Entrepreneurship</h2>
+            <div class="content">
+                <div class="activity-box">
+                    <p><strong>Prompt:</strong> "What's one AI-driven feature or product you love?"</p>
+                    <p style="margin-top: 15px;">Drop your answer in the chat (name the product/feature and a word or two about why).</p>
+                    <p style="margin-top: 15px;">We'll scan a few responses together and notice patterns.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Outline -->
+        <div class="slide" data-slide="4">
+            <h1>Outline</h1>
+            <div class="content outline-content">
+                <div class="outline-section">
+                    <strong>AI Driven Enterprises and How AI Helps Build them</strong>
+                </div>
+                <div class="outline-section">
+                    <strong>Mini lab: From idea → hypothesis → customer</strong>
+                    <ul style="margin-top: 10px; font-size: 0.95em;">
+                        <li>Use AI to generate 2–3 venture ideas</li>
+                        <li>Pick one and write: Customer hypothesis (who) and Value hypothesis (why it helps)</li>
+                    </ul>
+                </div>
+                <div class="outline-section">
+                    <strong>Simulated customer interview</strong>
+                    <ul style="margin-top: 10px; font-size: 0.95em;">
+                        <li>Use AI to role-play a customer and ask 3–4 questions</li>
+                    </ul>
+                </div>
+                <div class="outline-section">
+                    <strong>Refine your value proposition</strong>
+                    <ul style="margin-top: 10px; font-size: 0.95em;">
+                        <li>Rewrite your one-sentence value proposition based on what you heard</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Luke DeCoste -->
+        <div class="slide" data-slide="5">
+            <h1>Luke DeCoste (He/Him)</h1>
+            <div class="bio-grid">
+                <div class="bio-image-placeholder">👤</div>
+                <div>
+                    <h2>Founder, Researcher, Student, Sessional Faculty</h2>
+                    <p style="font-size: 1.1em; margin-bottom: 20px;">Researching entrepreneurship via a Ph.D. in Organizational Psychology</p>
+                    <p style="font-size: 1.1em; margin-bottom: 20px;"><strong>Core Values:</strong> Growth (Learning), Connection, Well-being, Impact</p>
+                    <div class="organizations">
+                        <div class="org-badge">VOLTA</div>
+                        <div class="org-badge">Techstars</div>
+                        <div class="org-badge">IGNITE</div>
+                        <div class="org-badge">Dalhousie</div>
+                        <div class="org-badge">Dal Innovates</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Section Header -->
+        <div class="slide gradient section" data-slide="6">
+            <h1>AI DRIVEN<br>ENTERPRISES</h1>
+        </div>
+
+        <!-- Slide 7: YC Stats -->
+        <div class="slide" data-slide="7">
+            <h1>Percent AI Companies in YCombinator Intakes</h1>
+            <div class="chart-container">
+                <div style="text-align: center;">
+                    <div style="display: flex; justify-content: space-around; align-items: flex-end; height: 300px; padding: 40px;">
+                        <div style="text-align: center;">
+                            <div style="width: 80px; height: 24px; background: #ff6b35; border-radius: 4px 4px 0 0;"></div>
+                            <div style="margin-top: 10px; font-weight: 600;">Winter 2020</div>
+                            <div style="font-size: 1.5em; font-weight: bold; color: #667eea;">8%</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="width: 80px; height: 210px; background: #ff6b35; border-radius: 4px 4px 0 0;"></div>
+                            <div style="margin-top: 10px; font-weight: 600;">Winter 2024</div>
+                            <div style="font-size: 1.5em; font-weight: bold; color: #667eea;">70%</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="width: 80px; height: 276px; background: #ff6b35; border-radius: 4px 4px 0 0;"></div>
+                            <div style="margin-top: 10px; font-weight: 600;">2025 – YTD</div>
+                            <div style="font-size: 1.5em; font-weight: bold; color: #667eea;">92%?</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p style="font-size: 0.85em; color: #666; margin-top: 20px;">Winter 2020, Winter 2024 - LightCone Podcast | 2025 YTD – Presenter estimate (Ycombinator.com/Companies)</p>
+        </div>
+
+        <!-- Slide 8: AI Driven Enterprise -->
+        <div class="slide" data-slide="8">
+            <h1>AI Driven Enterprise</h1>
+            <div class="content">
+                <ul>
+                    <li><strong>What they are:</strong> Startups with AI at the core of every function — from product to operations — built to scale globally with lean teams.</li>
+                    <li><strong>Why they matter:</strong> They blend the ambition of innovation-driven enterprises with the efficiency of small businesses.</li>
+                    <li><strong>Why now:</strong> Generative AI, cheap compute, and APIs have collapsed the time from idea to launch.</li>
+                    <li><strong>The shift:</strong> Revenue per employee is soaring (>$1M ARR per FTE in some cases), reshaping growth economics.</li>
+                    <li><strong>Implication:</strong> The bottleneck isn't building — it's knowing what to build.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 9: AI Value Propositions -->
+        <div class="slide" data-slide="9">
+            <h1>AI Value Propositions</h1>
+            <div class="content" style="display: flex; align-items: center; justify-content: center; height: 100%;">
+                <div style="text-align: center; max-width: 700px;">
+                    <p style="font-size: 2em; line-height: 1.6; font-weight: 500;">
+                        AI creates value by improving <strong style="color: #667eea;">prediction</strong>, which informs <strong style="color: #667eea;">judgment</strong>, guides <strong style="color: #667eea;">action</strong>, and shapes <strong style="color: #667eea;">outcomes</strong>.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 10: Impact Stats -->
+        <div class="slide gradient stat-highlight" data-slide="10">
+            <h1>The Impact of Generative AI on Entrepreneurial Performance</h1>
+            <div class="stat-number">43%</div>
+            <div class="stat-description">
+                <p><strong>Pedagogy Informed AI Group:</strong> 43% More Likely to Pivot</p>
+                <p style="margin-top: 15px; font-size: 0.9em;">Pedagogy Informed AI More Likely to Change Business Model</p>
+            </div>
+        </div>
+
+        <!-- Slide 11: Section Header -->
+        <div class="slide gradient section" data-slide="11">
+            <h1>BUILDING YOUR AIDE<br>WITH THE SCIENTIFIC<br>APPROACH</h1>
+        </div>
+
+        <!-- Slide 12: Being Here Now -->
+        <div class="slide" data-slide="12">
+            <h1>Being Here Now</h1>
+            <div class="content">
+                <ul>
+                    <li><strong>Expect Uncertainty</strong> — We're experimenting together.</li>
+                    <li><strong>Think Aloud</strong> — Share what you're noticing, not just what you know.</li>
+                    <li><strong>Build on Others</strong> — When you hear something useful, extend it.</li>
+                </ul>
+                <h2 style="margin-top: 40px;">Prepare to Engage:</h2>
+                <ul>
+                    <li>Open a google doc (doc.new in browser)</li>
+                    <li>Open your go to AI tool (Gemini, Claude, ChatGPT) other</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 13: Section Header -->
+        <div class="slide gradient section" data-slide="13">
+            <h1>SCIENTIFIC APPROACH<br>TO ENTREPRENEURSHIP</h1>
+        </div>
+
+        <!-- Slide 14: Prompt Activity -->
+        <div class="slide" data-slide="14">
+            <h1>Prompt: "Three AI Venture I'm Suited to Build"</h1>
+            <div class="content">
+                <p style="margin-bottom: 20px;">Submit this prompt to your main AI tool:</p>
+                <div class="activity-box">
+                    <p>Based on what you know about me, propose three AI-driven venture ideas I could have an unfair advantage building.</p>
+                    <ul style="margin-top: 15px;">
+                        <li>At least one should fit my motivations/values (what energizes me).</li>
+                        <li>At least one should use my current situation (skills, network, job, location, or timing).</li>
+                    </ul>
+                    <p style="margin-top: 15px;"><strong>For each idea, give up to 4 short bullets, including:</strong></p>
+                    <ul style="margin-top: 10px;">
+                        <li>Who the main user is and what they're trying to do</li>
+                        <li>How AI would help them</li>
+                        <li>A simple first paid pilot I could try in the next 30–60 days</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 15: Theory of Value -->
+        <div class="slide" data-slide="15">
+            <h1>Activity – Your Theory of Value</h1>
+            <h2>Step 2: Pick 1 idea and sharpen it</h2>
+            <div class="content">
+                <ul>
+                    <li>Choose one of the AI ideas that feels most energizing or realistic.</li>
+                    <li>Take 30 seconds to journal on this question:<br><em>"Who is my first customer, and what valuable change do they get from this idea?"</em></li>
+                </ul>
+                <div class="activity-box" style="margin-top: 30px;">
+                    <p><strong>Turn it into one sentence:</strong></p>
+                    <p style="margin-top: 15px; font-size: 1.2em; font-style: italic;">
+                        "For [customer], I help them [better outcome] by using AI to [how it helps]."
+                    </p>
+                </div>
+                <p style="margin-top: 20px;">Drop your sentence in the chat. We'll skim a few together and notice how clearly they state who it's for and what value it creates.</p>
+            </div>
+        </div>
+
+        <!-- Slide 16: Section Header -->
+        <div class="slide gradient section" data-slide="16">
+            <h1>HYPOTHESIS<br>ARTICULATION<br>AND TESTING</h1>
+        </div>
+
+        <!-- Slide 17: Hypothesis Formation -->
+        <div class="slide" data-slide="17">
+            <h1>Hypothesis Formation</h1>
+            <div class="content grid-4">
+                <div class="grid-item">
+                    <h3>Prioritization</h3>
+                    <p>Can the hypothesis be ranked against others for its importance to the theory and impact on decision-making</p>
+                </div>
+                <div class="grid-item">
+                    <h3>Coherent</h3>
+                    <p>How well does each hypothesis align with the overarching theory of value?</p>
+                </div>
+                <div class="grid-item">
+                    <h3>Simple</h3>
+                    <p>Could your hypotheses be simplified (so they only identify a single part, or a single connection)?</p>
+                </div>
+                <div class="grid-item">
+                    <h3>Falsifiable</h3>
+                    <p>Can you clearly describe what would prove each hypothesis wrong (so that you can determine if it's true or false)?</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 18: Write Hypothesis -->
+        <div class="slide" data-slide="18">
+            <h1>Activity – Write One Customer Value Hypothesis</h1>
+            <div class="content">
+                <p style="margin-bottom: 20px;">Take 30 seconds to complete this sentence:</p>
+                <div class="activity-box">
+                    <p style="font-size: 1.1em; margin-bottom: 15px;"><strong>Customer Value Hypothesis:</strong></p>
+                    <p style="font-style: italic;">
+                        "When I interview [type of customer] about [problem / task], at least some of them will say that [specific pain or desired outcome] really matters, and they'll be interested in an AI tool that [how your AI idea helps]."
+                    </p>
+                    <p style="margin-top: 20px;"><strong>Example:</strong></p>
+                    <p style="font-style: italic; color: #667eea;">
+                        "early-stage founders find tracking investor updates is stressful and will be interested in an AI tool that drafts and schedules clear update emails for them."
+                    </p>
+                </div>
+                <p style="margin-top: 20px;">Write your sentence, then drop it in the chat. This is what you're trying to confirm or challenge in your customer interview.</p>
+            </div>
+        </div>
+
+        <!-- Slide 19: Hypothesis Testing -->
+        <div class="slide" data-slide="19">
+            <h1>Hypothesis Testing</h1>
+            <div class="content grid-4">
+                <div class="grid-item">
+                    <h3>🗣️ Interviews</h3>
+                    <p><strong>Have real conversations to explore what people think and feel.</strong></p>
+                    <p style="margin-top: 10px; font-size: 0.9em;">Use open-ended questions<br>Follow a structured script for consistency where possible</p>
+                </div>
+                <div class="grid-item">
+                    <h3>📊 Surveys</h3>
+                    <p><strong>Collect insights from larger groups more quickly.</strong></p>
+                    <p style="margin-top: 10px; font-size: 0.9em;">Combine open and closed questions<br>Reach many people at once</p>
+                </div>
+                <div class="grid-item">
+                    <h3>💡 Prototype Testing</h3>
+                    <p><strong>Test whether your idea works in practice.</strong></p>
+                    <p style="margin-top: 10px; font-size: 0.9em;">Show a mock-up or early version<br>Watch how users interact with it</p>
+                </div>
+                <div class="grid-item">
+                    <h3>📈 A/B Testing</h3>
+                    <p><strong>Compare two versions to see which performs better.</strong></p>
+                    <p style="margin-top: 10px; font-size: 0.9em;">Randomly assign people to groups<br>Measure which version leads to better results</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 20: Simulating Customer Interviews -->
+        <div class="slide" data-slide="20">
+            <h1>Simulating Customer Interviews</h1>
+            <div class="content">
+                <p style="margin-bottom: 20px;">Modify this prompt with your customer info, then paste it into your AI tool:</p>
+                <div class="activity-box">
+                    <p style="font-size: 1.05em; line-height: 1.8;">
+                        You are a potential customer I want to learn from.
+                    </p>
+                    <p style="margin-top: 15px;">
+                        I'll describe my customer segment, and you'll respond as that person, drawing on realistic context — not what you think I want to hear.
+                    </p>
+                    <p style="margin-top: 15px;">
+                        Keep your answers short (2–3 sentences). Share facts, emotions, or routines from your experience, even if they challenge my assumptions.
+                    </p>
+                    <p style="margin-top: 15px;">
+                        When I ask questions, answer honestly and specifically from your perspective.
+                    </p>
+                    <p style="margin-top: 20px; padding-top: 20px; border-top: 2px solid #667eea;">
+                        <strong>Customer segment:</strong> [paste your customer description here]
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 21: Poll -->
+        <div class="slide gradient" data-slide="21">
+            <div class="qr-container">
+                <h1>Poll</h1>
+                <p style="font-size: 2em; font-weight: 600;">Respond at PollEv.com/luked033</p>
+                <div class="qr-box">
+                    <div style="width: 100%; height: 100%; background: white; display: flex; align-items: center; justify-content: center; font-size: 0.9em; text-align: center; color: #666;">
+                        [QR Code Placeholder]<br>
+                        Scan to respond
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="navigation">
+        <button class="nav-button" id="prevBtn" onclick="previousSlide()">← Previous</button>
+        <button class="nav-button" id="nextBtn" onclick="nextSlide()">Next →</button>
+    </div>
+
+    <script>
+        let currentSlide = 1;
+        const totalSlides = 21;
+
+        function showSlide(n) {
+            const slides = document.querySelectorAll('.slide');
+            
+            if (n > totalSlides) {
+                currentSlide = totalSlides;
+            } else if (n < 1) {
+                currentSlide = 1;
+            } else {
+                currentSlide = n;
+            }
+
+            slides.forEach(slide => slide.classList.remove('active'));
+            slides[currentSlide - 1].classList.add('active');
+
+            // Update counter
+            document.getElementById('slideCounter').textContent = `${currentSlide} / ${totalSlides}`;
+
+            // Update progress bar
+            const progress = (currentSlide / totalSlides) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+
+            // Update buttons
+            document.getElementById('prevBtn').disabled = currentSlide === 1;
+            document.getElementById('nextBtn').disabled = currentSlide === totalSlides;
+
+            // Store current slide in URL hash
+            window.location.hash = currentSlide;
+        }
+
+        function nextSlide() {
+            showSlide(currentSlide + 1);
+        }
+
+        function previousSlide() {
+            showSlide(currentSlide - 1);
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                e.preventDefault();
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                previousSlide();
+            } else if (e.key === 'Home') {
+                e.preventDefault();
+                showSlide(1);
+            } else if (e.key === 'End') {
+                e.preventDefault();
+                showSlide(totalSlides);
+            }
+        });
+
+        // Touch/swipe support for mobile
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        document.addEventListener('touchstart', function(e) {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        document.addEventListener('touchend', function(e) {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            if (touchEndX < touchStartX - 50) {
+                nextSlide();
+            }
+            if (touchEndX > touchStartX + 50) {
+                previousSlide();
+            }
+        }
+
+        // Initialize from URL hash if present
+        window.addEventListener('load', function() {
+            const hash = window.location.hash.substring(1);
+            if (hash && !isNaN(hash)) {
+                showSlide(parseInt(hash));
+            } else {
+                showSlide(1);
+            }
+        });
+
+        // Handle browser back/forward
+        window.addEventListener('hashchange', function() {
+            const hash = window.location.hash.substring(1);
+            if (hash && !isNaN(hash)) {
+                showSlide(parseInt(hash));
+            }
+        });
+    </script>
+</body>
+</html>
