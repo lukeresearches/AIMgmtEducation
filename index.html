@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Foundations for Management Education</title>
+    <title>AI Foundations for Management Education | Dalhousie</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Space+Mono:wght@400;700&display=swap');
         
@@ -54,8 +54,8 @@
                 45deg,
                 transparent,
                 transparent 10px,
-                rgba(255,255,255,0.03) 10px,
-                rgba(255,255,255,0.03) 20px
+                rgba(253,185,19,0.05) 10px,
+                rgba(253,185,19,0.05) 20px
             );
             animation: slide 20s linear infinite;
         }
@@ -147,6 +147,7 @@
             display: flex;
             gap: 2rem;
             list-style: none;
+            flex-wrap: wrap;
         }
         
         .nav-links a {
@@ -233,7 +234,6 @@
             background-image: linear-gradient(white, white), linear-gradient(135deg, #FDB913 0%, #FFC933 100%);
             background-clip: padding-box, border-box;
             background-origin: padding-box, border-box;
-            border-top: 4px solid transparent;
         }
         
         .requirement-card:hover {
@@ -264,61 +264,112 @@
             font-size: 1.5rem;
         }
         
-        /* Process Timeline */
-        .timeline {
-            position: relative;
-            padding: 2rem 0;
+        /* Course Format Section */
+        .format-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
         }
         
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 50%;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background: linear-gradient(180deg, #000000, #FDB913);
-            transform: translateX(-50%);
+        .format-card {
+            background: var(--bg-light);
+            padding: 2rem;
+            border-radius: 15px;
+            border-left: 5px solid var(--dal-gold);
+        }
+        
+        .format-card h3 {
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+        
+        .format-card ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .format-card li {
+            padding: 0.5rem 0;
+            color: var(--text-light);
+        }
+        
+        .format-card li:before {
+            content: "▶";
+            color: var(--dal-gold);
+            margin-right: 0.5rem;
+            font-size: 0.8rem;
+        }
+        
+        /* Timeline Section */
+        .timeline-grid {
+            display: grid;
+            gap: 1.5rem;
+            margin-top: 2rem;
         }
         
         .timeline-item {
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            margin-bottom: 4rem;
-            position: relative;
+            gap: 2rem;
+            padding: 1.5rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s;
+        }
+        
+        .timeline-item:hover {
+            transform: translateX(10px);
+        }
+        
+        .timeline-date {
+            background: var(--dal-gold);
+            color: black;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            font-weight: bold;
+            white-space: nowrap;
+            min-width: 120px;
+            text-align: center;
         }
         
         .timeline-content {
-            width: 45%;
-            background: white;
-            padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            flex: 1;
         }
         
-        .timeline-item:nth-child(even) .timeline-content {
-            margin-left: auto;
+        /* Enhanced Curriculum Section */
+        .curriculum-container {
+            margin-top: 3rem;
         }
         
-        .timeline-dot {
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 20px;
-            height: 20px;
-            background: white;
-            border: 4px solid #FDB913;
-            border-radius: 50%;
-            z-index: 1;
+        .module-section {
+            margin-bottom: 3rem;
         }
         
-        /* Curriculum Week Cards */
-        .week-grid {
+        .module-header {
+            background: linear-gradient(135deg, #000000 0%, #333333 100%);
+            color: var(--dal-gold);
+            padding: 1.5rem 2rem;
+            border-radius: 15px 15px 0 0;
+            font-size: 1.4rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .module-header:hover {
+            background: linear-gradient(135deg, #1a1a1a 0%, #4a4a4a 100%);
+        }
+        
+        .week-cards-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 2rem;
-            margin-top: 3rem;
+            padding: 2rem;
+            background: var(--bg-light);
+            border-radius: 0 0 15px 15px;
         }
         
         .week-card {
@@ -326,11 +377,14 @@
             border-radius: 15px;
             overflow: hidden;
             box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-            transition: transform 0.3s;
+            transition: all 0.3s;
+            cursor: pointer;
+            position: relative;
         }
         
         .week-card:hover {
             transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.12);
         }
         
         .week-header {
@@ -338,17 +392,33 @@
             color: white;
             font-weight: 600;
             font-size: 1.1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
         
-        .week-1 { background: linear-gradient(135deg, #000000, #333333); }
-        .week-2 { background: linear-gradient(135deg, #FDB913, #FFC933); }
-        .week-3 { background: linear-gradient(135deg, #333333, #5C5C5C); }
-        .week-4 { background: linear-gradient(135deg, #000000, #1A1A1A); }
-        .week-5 { background: linear-gradient(135deg, #FDB913, #FFDD55); }
-        .week-6 { background: linear-gradient(135deg, #1A1A1A, #333333); }
+        .week-1, .week-4, .week-7, .week-10 { background: linear-gradient(135deg, #000000, #333333); }
+        .week-2, .week-5, .week-8, .week-11 { background: linear-gradient(135deg, #FDB913, #FFC933); color: black; }
+        .week-3, .week-6, .week-9, .week-12 { background: linear-gradient(135deg, #333333, #5C5C5C); }
+        
+        .expand-icon {
+            font-size: 1.2rem;
+            transition: transform 0.3s;
+        }
+        
+        .week-card.expanded .expand-icon {
+            transform: rotate(180deg);
+        }
         
         .week-content {
             padding: 1.5rem;
+            max-height: 200px;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+        }
+        
+        .week-card.expanded .week-content {
+            max-height: 600px;
         }
         
         .week-content h4 {
@@ -357,9 +427,10 @@
             color: var(--text-dark);
         }
         
-        .week-content p {
+        .week-content .focus {
             color: var(--text-light);
             line-height: 1.6;
+            margin-bottom: 1rem;
         }
         
         .application-box {
@@ -374,6 +445,55 @@
             color: var(--text-dark);
             display: block;
             margin-bottom: 0.5rem;
+        }
+        
+        /* Process Timeline */
+        .process-timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+        
+        .process-timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, #000000, #FDB913);
+            transform: translateX(-50%);
+        }
+        
+        .process-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 4rem;
+            position: relative;
+        }
+        
+        .process-content {
+            width: 45%;
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+        
+        .process-item:nth-child(even) .process-content {
+            margin-left: auto;
+        }
+        
+        .process-dot {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 20px;
+            background: white;
+            border: 4px solid #FDB913;
+            border-radius: 50%;
+            z-index: 1;
         }
         
         /* Profile Section */
@@ -441,21 +561,21 @@
         
         /* Responsive */
         @media (max-width: 768px) {
-            .timeline::before {
+            .process-timeline::before {
                 left: 20px;
             }
             
-            .timeline-item {
+            .process-item {
                 flex-direction: column;
                 align-items: flex-start;
             }
             
-            .timeline-content {
+            .process-content {
                 width: calc(100% - 50px);
                 margin-left: 50px;
             }
             
-            .timeline-dot {
+            .process-dot {
                 left: 20px;
             }
             
@@ -464,6 +584,10 @@
                 gap: 1rem;
                 width: 100%;
                 margin-top: 1rem;
+            }
+            
+            .week-cards-container {
+                grid-template-columns: 1fr;
             }
         }
         
@@ -478,6 +602,21 @@
             opacity: 1;
             transform: translateY(0);
         }
+        
+        /* Click hint animation */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        .click-hint {
+            display: inline-block;
+            margin-left: 0.5rem;
+            color: var(--dal-gold);
+            font-size: 0.8rem;
+            animation: pulse 2s infinite;
+        }
     </style>
 </head>
 <body>
@@ -487,9 +626,10 @@
             <h1>AI Foundations for Management Education</h1>
             <p class="subtitle">Building practical AI literacy for your BComm, BMgmt, and MBA students</p>
             <div class="hero-meta">
-                <div class="meta-item">📚 6-Week Program</div>
+                <div class="meta-item">📚 12-Week Program</div>
                 <div class="meta-item">🎯 Experiential Learning</div>
-                <div class="meta-item">🚀 Fall 2025 Launch</div>
+                <div class="meta-item">💻 Hybrid Delivery</div>
+                <div class="meta-item">🚀 Launch 2025</div>
             </div>
         </div>
     </div>
@@ -497,25 +637,44 @@
     <!-- Navigation -->
     <nav class="nav">
         <div class="nav-container">
-            <div style="font-weight: 800; font-size: 1.2rem; color: var(--dal-gold);"> Faculty of Management</div>
+            <div style="font-weight: 800; font-size: 1.2rem; color: var(--dal-gold);">DALHOUSIE | Faculty of Management</div>
             <ul class="nav-links">
+                <li><a href="#overview">Overview</a></li>
                 <li><a href="#value">Value</a></li>
                 <li><a href="#requirements">Requirements</a></li>
-                <li><a href="#process">Process</a></li>
+                <li><a href="#format">Format</a></li>
+                <li><a href="#timeline">Timeline</a></li>
                 <li><a href="#curriculum">Curriculum</a></li>
-                <li><a href="#instructor">Qualifications</a></li>
+                <li><a href="#process">Process</a></li>
+                <li><a href="#instructor">Instructor</a></li>
             </ul>
         </div>
     </nav>
+    
+    <!-- Overview Section -->
+    <section id="overview">
+        <div class="section-header">
+            <h2>Overview</h2>
+            <p>A comprehensive pathway for AI integration in management education</p>
+        </div>
+        <div class="scroll-fade">
+            <p style="font-size: 1.1rem; line-height: 1.8; max-width: 900px; margin: 0 auto;">
+                This document outlines a pathway for integrating foundational AI courses with Dalhousie's management programs to build practical AI literacy for BComm, BMgmt, and MBA students. Informed by an initial conversation with Dr. Hamed Aghakhani and research and experience in AI-enabled management education, it proposes program requirements, a course design process, key deliverables, and initial curriculum and pedagogy ideas.
+            </p>
+            <p style="font-size: 1.1rem; line-height: 1.8; max-width: 900px; margin: 2rem auto 0;">
+                The courses would use an evidence-based, experiential approach that moves from core AI concepts to applied practice in management, finance, and organizational contexts, supporting students in building artifacts that will support their management careers. The outline is intended as a starting point, to be refined into a fully designed curriculum, pedagogy, and built-in evaluation on AI readiness for the courses.
+            </p>
+        </div>
+    </section>
     
     <!-- Theory of Value -->
     <section id="value">
         <div class="section-header">
             <h2>Theory of Value</h2>
-            <p>Draft vision for AI-enhanced management education</p>
+            <p>Our vision for AI-enabled management education</p>
         </div>
         <div class="value-statement scroll-fade">
-            Integrating AI foundations courses with your world-class management education will provide undergrad and MBA students practical AI literacy that amplifies how they learn, work, and lead in AI-enabled organizations.
+            Integrating AI foundations courses with Dalhousie's world-class management education will provide undergrad and MBA students practical AI literacy that amplifies how they learn, work, and lead in AI-enabled organizations.
         </div>
     </section>
     
@@ -528,17 +687,17 @@
         <div class="requirements-grid">
             <div class="requirement-card scroll-fade">
                 <div class="requirement-icon">🎯</div>
-                <h3>Faculty Vision Alignment</h3>
-                <p>Serves as the AI readiness foundation for future AI offerings and an MBA AI certificate</p>
+                <h3>Supports Faculty Vision</h3>
+                <p>Courses serve as the AI readiness foundation for future AI offerings and an MBA AI certificate</p>
             </div>
             <div class="requirement-card scroll-fade">
                 <div class="requirement-icon">🔗</div>
-                <h3>Curriculum Integration</h3>
-                <p>BComm/BMgmt/MBA instructors can map course modules to current objectives and assignments</p>
+                <h3>Aligned with Existing Courses</h3>
+                <p>BComm/BMgmt/MBA instructors can map course modules to their current objectives and assignments</p>
             </div>
             <div class="requirement-card scroll-fade">
                 <div class="requirement-icon">🛠️</div>
-                <h3>Experiential Learning</h3>
+                <h3>Experiential</h3>
                 <p>Students use AI tools to build course artifacts in most class sessions</p>
             </div>
             <div class="requirement-card scroll-fade">
@@ -569,7 +728,298 @@
             <div class="requirement-card scroll-fade">
                 <div class="requirement-icon">⚡</div>
                 <h3>Rapid Piloting</h3>
-                <p>Minimal version runs by fall/summer with 2-3 pilots producing refinement data</p>
+                <p>A minimal version runs by fall, possibly summer, with 2-3 pilots producing data to refine the full course</p>
+            </div>
+            <div class="requirement-card scroll-fade">
+                <div class="requirement-icon">🔮</div>
+                <h3>Adaptable to Fast-Evolving AI</h3>
+                <p>Content is modular so models, tools, and examples can be updated each term</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Course Format Section -->
+    <section id="format">
+        <div class="section-header">
+            <h2>Course Format</h2>
+            <p>Flexible delivery options for diverse student needs</p>
+        </div>
+        <div class="format-grid scroll-fade">
+            <div class="format-card">
+                <h3>📅 Duration</h3>
+                <ul>
+                    <li>12 weeks</li>
+                    <li>Progressive skill building</li>
+                    <li>Modular structure</li>
+                </ul>
+            </div>
+            <div class="format-card">
+                <h3>🎓 Undergraduate</h3>
+                <ul>
+                    <li>Mostly in-person delivery</li>
+                    <li>Some online components</li>
+                    <li>Class size: 100-200 students</li>
+                </ul>
+            </div>
+            <div class="format-card">
+                <h3>🎯 MBA</h3>
+                <ul>
+                    <li>Hybrid format available</li>
+                    <li>Online option supported</li>
+                    <li>Class size: 30-40 students</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Timeline Section -->
+    <section id="timeline">
+        <div class="section-header">
+            <h2>Timeline for Completion</h2>
+            <p>Key milestones for course development and launch</p>
+        </div>
+        <div class="timeline-grid scroll-fade">
+            <div class="timeline-item">
+                <div class="timeline-date">Dec 11</div>
+                <div class="timeline-content">Framework finalized</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">Jan 2</div>
+                <div class="timeline-content">Course outline available</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">ASAP</div>
+                <div class="timeline-content">Program approvals</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">Late January</div>
+                <div class="timeline-content">Including the course in the timetable</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">Winter Term</div>
+                <div class="timeline-content">Developing 2-4 modules to experiment as part of PPE class with MBA students</div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Enhanced Curriculum Section -->
+    <section id="curriculum">
+        <div class="section-header">
+            <h2>12-Week Curriculum</h2>
+            <p>Progressive journey from foundations to advanced applications <span class="click-hint">(click cards to expand)</span></p>
+        </div>
+        
+        <div class="curriculum-container">
+            <!-- Weeks 1-3: AI Foundations -->
+            <div class="module-section scroll-fade">
+                <div class="module-header">
+                    Weeks 1-3: AI Foundations
+                </div>
+                <div class="week-cards-container">
+                    <div class="week-card" onclick="toggleCard(this)">
+                        <div class="week-header week-1">
+                            <span>Week 1</span>
+                            <span class="expand-icon">▼</span>
+                        </div>
+                        <div class="week-content">
+                            <h4>AI Disruption & Literacy Foundations</h4>
+                            <p class="focus">AI overview; generative vs. predictive AI; models, prompts, context; AI innovation; adoption; ethics (bias, privacy, climate); implications for early careers, course roadmap.</p>
+                            <div class="application-box">
+                                <strong>Application:</strong>
+                                Complete an "AI impact scan" of risks, opportunities, open questions for their industry/function aided by transparent, structured AI use.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="week-card" onclick="toggleCard(this)">
+                        <div class="week-header week-2">
+                            <span>Week 2</span>
+                            <span class="expand-icon">▼</span>
+                        </div>
+                        <div class="week-content">
+                            <h4>Co-Intelligence: AI as a Learning Partner & Mindset</h4>
+                            <p class="focus">AI as a co-pilot. Tools for learning (e.g. ChatGPT/Study); iterative and complex prompt-crafting (e.g. roles, chain-of-thought, system instructions); human in the loop; academic integrity and critical reflection.</p>
+                            <div class="application-box">
+                                <strong>Application:</strong>
+                                Building on Week 1, students use iterative prompts to critique and reinforce AI impact scan.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="week-card" onclick="toggleCard(this)">
+                        <div class="week-header week-3">
+                            <span>Week 3</span>
+                            <span class="expand-icon">▼</span>
+                        </div>
+                        <div class="week-content">
+                            <h4>AI in Business, Finance & Entrepreneurship</h4>
+                            <p class="focus">Cross-functional use cases in marketing, operations, HR, finance, and entrepreneurship; AI in forecasting / decision support; AI-enabled business models of main labs (e.g. OpenAI), and AI firms (e.g., CaseText's valuation jump).</p>
+                            <div class="application-box">
+                                <strong>Application:</strong>
+                                Students use impact scan to propose an AI enhancement focus problem.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Weeks 4-6: AI in Practice -->
+            <div class="module-section scroll-fade">
+                <div class="module-header">
+                    Weeks 4-6: AI in Practice
+                </div>
+                <div class="week-cards-container">
+                    <div class="week-card" onclick="toggleCard(this)">
+                        <div class="week-header week-4">
+                            <span>Week 4</span>
+                            <span class="expand-icon">▼</span>
+                        </div>
+                        <div class="week-content">
+                            <h4>AI Value Propositions and Research</h4>
+                            <p class="focus">AI value creation in organizations; decision and workflow automation; linking AI capabilities to customer problems.</p>
+                            <div class="application-box">
+                                <strong>Application:</strong>
+                                Students complete AI-assisted secondary research; customer research (simulated), and qualitative data analysis to begin articulating an AI value proposition with model inputs and outputs.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="week-card" onclick="toggleCard(this)">
+                        <div class="week-header week-5">
+                            <span>Week 5</span>
+                            <span class="expand-icon">▼</span>
+                        </div>
+                        <div class="week-content">
+                            <h4>AI Analysis / Prototyping</h4>
+                            <p class="focus">Students learn the basics of AI-assisted coding and no-code tools, including spreadsheet-based analysis.</p>
+                            <div class="application-box">
+                                <strong>Application:</strong>
+                                Students develop initial logic model for value proposition, and prototype with no-code solutions.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="week-card" onclick="toggleCard(this)">
+                        <div class="week-header week-6">
+                            <span>Week 6</span>
+                            <span class="expand-icon">▼</span>
+                        </div>
+                        <div class="week-content">
+                            <h4>AI in Organizations: Leadership & Collaboration</h4>
+                            <p class="focus">AI-enabled workflows and roles; collaborating with AI as a teammate; change management; communication with stakeholders; equity and inclusion considerations in AI adoption; preparing for ongoing AI change.</p>
+                            <div class="application-box">
+                                <strong>Application:</strong>
+                                Students present redesigned workflow highlighting benefits, costs, and leadership asks to mock boards from peers. AI board member prompted to critique plan on economics, ethics, and hallucination.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Weeks 7-9: AI Strategy and Governance -->
+            <div class="module-section scroll-fade">
+                <div class="module-header">
+                    Weeks 7-9: AI Strategy and Governance
+                </div>
+                <div class="week-cards-container">
+                    <div class="week-card" onclick="toggleCard(this)">
+                        <div class="week-header week-7">
+                            <span>Week 7</span>
+                            <span class="expand-icon">▼</span>
+                        </div>
+                        <div class="week-content">
+                            <h4>AI Governance and Regulation</h4>
+                            <p class="focus">Managing bias and fairness; data privacy (e.g., GDPR, Canada's regulation evolution); IP and copyright issues; the role of the manager in establishing AI guardrails.</p>
+                            <div class="application-box">
+                                <strong>Application:</strong>
+                                Students identify / respond to compliance risks to their proposed business case and develop a leadership memo for managing such risk.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="week-card" onclick="toggleCard(this)">
+                        <div class="week-header week-8">
+                            <span>Week 8</span>
+                            <span class="expand-icon">▼</span>
+                        </div>
+                        <div class="week-content">
+                            <h4>AI Strategy: Building a Roadmap for RoI</h4>
+                            <p class="focus">Rethinking organizational, technological, and design systems to leverage AI capabilities. Moves beyond one-off AI tools to creating adaptive, intelligent, and human-centric systems that provide Return on Investment.</p>
+                            <div class="application-box">
+                                <strong>Application:</strong>
+                                Students develop AI strategy and implementation roadmap for target organization.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="week-card" onclick="toggleCard(this)">
+                        <div class="week-header week-9">
+                            <span>Week 9</span>
+                            <span class="expand-icon">▼</span>
+                        </div>
+                        <div class="week-content">
+                            <h4>The Future of Work: Human-AI Collaboration</h4>
+                            <p class="focus">Advanced models of human-AI teaming; upskilling and reskilling the workforce; ethical considerations in automated decision-making; the manager's role as an AI orchestrator.</p>
+                            <div class="application-box">
+                                <strong>Application:</strong>
+                                Informed by case studies, students design a training program and change management plan for their focal organization.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Weeks 10-12: Advanced Application Sprint -->
+            <div class="module-section scroll-fade">
+                <div class="module-header">
+                    Weeks 10-12: Advanced Application Sprint
+                </div>
+                <div class="week-cards-container">
+                    <div class="week-card" onclick="toggleCard(this)">
+                        <div class="week-header week-10">
+                            <span>Week 10</span>
+                            <span class="expand-icon">▼</span>
+                        </div>
+                        <div class="week-content">
+                            <h4>Deep Dive: AI in Marketing & Customer Experience (CX)</h4>
+                            <p class="focus">Generative AI for content creation and hyper-personalization; predictive analytics for customer segmentation; AI-driven sales and service automation; ethical marketing.</p>
+                            <div class="application-box">
+                                <strong>Application:</strong>
+                                Teams use GenAI tools to develop a personalized marketing campaign and measure its simulated impact.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="week-card" onclick="toggleCard(this)">
+                        <div class="week-header week-11">
+                            <span>Week 11</span>
+                            <span class="expand-icon">▼</span>
+                        </div>
+                        <div class="week-content">
+                            <h4>Deep Dive: AI Area of Choice</h4>
+                            <p class="focus">Students select an AI application area relevant to their career or academic focus (e.g., AI in Healthcare, Fintech, Sustainability, Robotics, Operations & Supply Chain, etc.). Focus on in-depth analysis of a high-value use case within that area, including market size, competitive landscape, technical feasibility, and ethical considerations.</p>
+                            <div class="application-box">
+                                <strong>Application:</strong>
+                                Refine business case with greater insights from research.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="week-card" onclick="toggleCard(this)">
+                        <div class="week-header week-12">
+                            <span>Week 12</span>
+                            <span class="expand-icon">▼</span>
+                        </div>
+                        <div class="week-content">
+                            <h4>Final Synthesis & Portfolio Presentation</h4>
+                            <p class="focus">Students select a high-potential project and develop a Go-to-Market Artifact designed to attract a specific audience. Sample options: 1) White Paper, or Podcast (cited for a target company/industry), 2) Prototype & Landing Page (low-fidelity prototype and persuasive landing page to test market interest), or 3) "AI-Ready" Portfolio (curated presentation of course artifacts framed as a value proposition for specific role).</p>
+                            <div class="application-box">
+                                <strong>Application:</strong>
+                                Final portfolio presentation showcasing AI competencies developed throughout the course.
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -580,143 +1030,62 @@
             <h2>Course Design Process</h2>
             <p>Strategic approach to curriculum development</p>
         </div>
-        <div class="timeline">
-            <div class="timeline-item scroll-fade">
-                <div class="timeline-content">
-                    <h3>1. Clarify Vision & Constraints</h3>
-                    <p>Meet with FoM leadership to define goals, timelines, and how courses anchor future AI offerings</p>
+        <div class="process-timeline">
+            <div class="process-item scroll-fade">
+                <div class="process-content">
+                    <h3>1. Clarify vision and constraints</h3>
+                    <p>Meet with FoM leadership (MBA, BComm, BMgmt) to define goals, timelines, and how the courses anchor future AI offerings and certificates.</p>
                 </div>
-                <div class="timeline-dot"></div>
+                <div class="process-dot"></div>
             </div>
-            <div class="timeline-item scroll-fade">
-                <div class="timeline-content">
-                    <h3>2. Draft High-Level Outline</h3>
-                    <p>Sketch shared outline with modules, core concepts, and assessment approach</p>
+            <div class="process-item scroll-fade">
+                <div class="process-content">
+                    <h3>2. Draft high-level course outline</h3>
+                    <p>Use existing knowledge, and the above requirements to sketch a shared outline (modules, core concepts, assessment approach) for courses.</p>
                 </div>
-                <div class="timeline-dot"></div>
+                <div class="process-dot"></div>
             </div>
-            <div class="timeline-item scroll-fade">
-                <div class="timeline-content">
-                    <h3>3. Map to Existing Curriculum</h3>
-                    <p>Align draft outline with current objectives, assignments, and pathways</p>
+            <div class="process-item scroll-fade">
+                <div class="process-content">
+                    <h3>3. Map to existing curriculum</h3>
+                    <p>Scan core course outlines and meet with key instructors to align the draft outline with current objectives, assignments, and pathways.</p>
                 </div>
-                <div class="timeline-dot"></div>
+                <div class="process-dot"></div>
             </div>
-            <div class="timeline-item scroll-fade">
-                <div class="timeline-content">
-                    <h3>4. Ground in Evidence</h3>
-                    <p>Refresh literature reviews and consult employers to refine outcomes</p>
+            <div class="process-item scroll-fade">
+                <div class="process-content">
+                    <h3>4. Ground in evidence and market needs</h3>
+                    <p>Refresh recent literature reviews on AI in management education and consult employers/industry partners to refine outcomes.</p>
                 </div>
-                <div class="timeline-dot"></div>
+                <div class="process-dot"></div>
             </div>
-            <div class="timeline-item scroll-fade">
-                <div class="timeline-content">
-                    <h3>5. Design Modular Blocks</h3>
-                    <p>Create reusable modules that support both undergrad and MBA levels</p>
+            <div class="process-item scroll-fade">
+                <div class="process-content">
+                    <h3>5. Design modular, updatable building blocks</h3>
+                    <p>Turn the outline into reusable modules that support undergrad and MBA, and can be updated as tools change.</p>
                 </div>
-                <div class="timeline-dot"></div>
+                <div class="process-dot"></div>
             </div>
-            <div class="timeline-item scroll-fade">
-                <div class="timeline-content">
-                    <h3>6. Pilot & Refine</h3>
-                    <p>Test selected modules, collect AI-readiness data and faculty feedback</p>
+            <div class="process-item scroll-fade">
+                <div class="process-content">
+                    <h3>6. Pilot, measure, and refine</h3>
+                    <p>Test selected weeks or modules in existing settings (e.g., PPE, guest sessions), collect quick AI-readiness and engagement data plus faculty feedback.</p>
                 </div>
-                <div class="timeline-dot"></div>
+                <div class="process-dot"></div>
             </div>
-            <div class="timeline-item scroll-fade">
-                <div class="timeline-content">
-                    <h3>7. Complete Detailed Syllabus</h3>
-                    <p>Translate framework into week-by-week syllabus with topics, readings, and labs</p>
+            <div class="process-item scroll-fade">
+                <div class="process-content">
+                    <h3>7. Complete week-by-week syllabus</h3>
+                    <p>Translate the module framework into detailed, week-by-week syllabus (topics, readings, in-class labs, assessments, and example AI tools).</p>
                 </div>
-                <div class="timeline-dot"></div>
+                <div class="process-dot"></div>
             </div>
-            <div class="timeline-item scroll-fade">
-                <div class="timeline-content">
-                    <h3>8. Prepare for Scale</h3>
-                    <p>Package teaching guides, rubrics, and tech setup for other instructors</p>
+            <div class="process-item scroll-fade">
+                <div class="process-content">
+                    <h3>8. Prepare for scalable delivery and evolution</h3>
+                    <p>Package teaching guides, assessment rubrics, and tech setup so other instructors can deliver the courses, and define how to refresh tools, cases, and examples.</p>
                 </div>
-                <div class="timeline-dot"></div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Curriculum Overview -->
-    <section id="curriculum">
-        <div class="section-header">
-            <h2>Six-Week Curriculum</h2>
-            <p>Progressive journey from foundations to application</p>
-        </div>
-        <div class="week-grid">
-            <div class="week-card scroll-fade">
-                <div class="week-header week-1">Week 1</div>
-                <div class="week-content">
-                    <h4>AI Disruption & Literacy Foundations</h4>
-                    <p>AI overview, generative vs. predictive AI, basic model logic, prompting and context, AI innovation, ethics (bias, privacy, climate impacts).</p>
-                    <div class="application-box">
-                        <strong>Application:</strong>
-                        Students complete an "AI impact scan" on an industry/function they care about and write a brief on risks, opportunities, and open questions.
-                    </div>
-                </div>
-            </div>
-            
-            <div class="week-card scroll-fade">
-                <div class="week-header week-2">Week 2</div>
-                <div class="week-content">
-                    <h4>AI as a Learning Partner & Mindset</h4>
-                    <p>AI tools for learning (NotebookLM, ChatGPT), prompting for learning, human in the loop, academic integrity, critical reflection on outputs.</p>
-                    <div class="application-box">
-                        <strong>Application:</strong>
-                        Test an AI-enhanced study workflow, interview a peer about AI use, and revise personal "AI use guidelines."
-                    </div>
-                </div>
-            </div>
-            
-            <div class="week-card scroll-fade">
-                <div class="week-header week-3">Week 3</div>
-                <div class="week-content">
-                    <h4>AI Value Propositions</h4>
-                    <p>How AI creates value in organizations, automating decisions and workflows, AI-native and AI-disrupted firms, linking capabilities to business models.</p>
-                    <div class="application-box">
-                        <strong>Application:</strong>
-                        Teams draft and critique an AI-enabled value proposition for a real management problem.
-                    </div>
-                </div>
-            </div>
-            
-            <div class="week-card scroll-fade">
-                <div class="week-header week-4">Week 4</div>
-                <div class="week-content">
-                    <h4>AI Skills: Research & Data Analysis</h4>
-                    <p>AI-assisted secondary research, summarizing reports, qualitative data analysis, basics of AI-assisted coding or no-code tools.</p>
-                    <div class="application-box">
-                        <strong>Application:</strong>
-                        Use AI to synthesize research and code qualitative data into themes, producing a management memo.
-                    </div>
-                </div>
-            </div>
-            
-            <div class="week-card scroll-fade">
-                <div class="week-header week-5">Week 5</div>
-                <div class="week-content">
-                    <h4>AI in Business, Finance & Entrepreneurship</h4>
-                    <p>Cross-functional use cases in marketing, operations, HR, and finance. AI in forecasting and decision support, AI-enabled startups.</p>
-                    <div class="application-box">
-                        <strong>Application:</strong>
-                        Case-based lab analyzing how AI reshapes business models and proposing improvements.
-                    </div>
-                </div>
-            </div>
-            
-            <div class="week-card scroll-fade">
-                <div class="week-header week-6">Week 6</div>
-                <div class="week-content">
-                    <h4>AI in Organizations: Leadership & Collaboration</h4>
-                    <p>AI-enabled workflows and roles, collaborating with AI, change management, equity and inclusion in AI adoption.</p>
-                    <div class="application-box">
-                        <strong>Application:</strong>
-                        Teams redesign a workflow to integrate AI responsibly and present a plan highlighting benefits, risks, and leadership actions.
-                    </div>
-                </div>
+                <div class="process-dot"></div>
             </div>
         </div>
     </section>
@@ -724,7 +1093,7 @@
     <!-- Instructor Profile -->
     <section id="instructor">
         <div class="section-header">
-            <h2>Qualifications</h2>
+            <h2>Lead Instructor</h2>
             <p>Bringing research and practice together</p>
         </div>
         <div class="profile-section scroll-fade">
@@ -733,7 +1102,10 @@
                 <p class="title">PhD Candidate & Serial Entrepreneur</p>
             </div>
             <p style="text-align: center; max-width: 800px; margin: 0 auto; line-height: 1.8;">
-                Luke DeCoste brings a unique blend of academic rigor and entrepreneurial experience. He has taught Dalhousie's MGMT 4901 five times, redesigning it for AI integration, and recently helped launch AI2Market through Dal Innovates. His research includes systematic literature reviews on AI in management education and randomized controlled trials on AI-enhanced learning.
+                Luke DeCoste is a PhD candidate and serial entrepreneur whose teaching and course design are tightly linked to active research on AI in management education. He has taught Dalhousie's Faculty of Management Entrepreneurship and Innovation capstone (MGMT 4901) five times, redesigning it to withstand and harness widespread student use of AI, and recently helped launch AI2Market, a 9-week Dal Innovates program on building AI-driven enterprises.
+            </p>
+            <p style="text-align: center; max-width: 800px; margin: 1.5rem auto; line-height: 1.8;">
+                Luke has delivered management training for organizations such as Dal Innovates, Lab2Market, Ignite, Volta, Emera ideaHUB, the Randall Lewis Center for Innovation and Entrepreneurship, and ChaiTech.
             </p>
             <div class="credentials-grid">
                 <div class="credential">
@@ -746,11 +1118,11 @@
                 </div>
                 <div class="credential">
                     <strong>📚 Research</strong>
-                    <p>Academy of Management, Conference on Field Experiments in Strategy presenter</p>
+                    <p>Systematic literature review on AI in management education, RCT on AI-enhanced learning</p>
                 </div>
                 <div class="credential">
-                    <strong>🚀 Training Delivered</strong>
-                    <p>Dal Innovates, NSCC, Labs4, Lab2Market, Ignite, Volta, Emera ideaHUB</p>
+                    <strong>🎤 Presentations</strong>
+                    <p>Academy of Management, Conference on Field Experiments in Strategy</p>
                 </div>
             </div>
         </div>
@@ -764,6 +1136,11 @@
     </footer>
     
     <script>
+        // Toggle card expansion
+        function toggleCard(card) {
+            card.classList.toggle('expanded');
+        }
+        
         // Scroll animations
         const observerOptions = {
             threshold: 0.1,
@@ -793,6 +1170,19 @@
                         block: 'start'
                     });
                 }
+            });
+        });
+        
+        // Add hover effect hint for week cards
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.week-card');
+            cards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.style.transform = 'scale(1.02)';
+                    setTimeout(() => {
+                        card.style.transform = 'scale(1)';
+                    }, 300);
+                }, index * 100);
             });
         });
     </script>
